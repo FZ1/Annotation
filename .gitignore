@@ -1,0 +1,8 @@
+#classファイルを無視する
+*.class
+#.metadataディレクトリを無視する
+.metadata/
+#RemoteSystemsTempFilesディレクトリを無視する
+RemoteSystemsTempFiles/
+#.recommendersディレクトリを無視する
+.recommenders/
