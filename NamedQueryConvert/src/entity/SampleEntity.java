@@ -26,12 +26,14 @@ import javax.persistence.NamedQuery;
 		query = "selet *"
 			+ " from SAMPLE_ENTITY t"
 			+ " where t.NAME = :name"
-			+ " and t.AGE = :age"),
+			+ " and t.AGE = :age",
+		resultClass = SampleEntity.class),
 	@NamedNativeQuery(name = "NamedNativeQuery2", 
 		query = "select *"
 			+ " from SAMPLE_ENTITY t"
 			+ " where t.NAME = :name"
-			+ " and t.ADDRESS = :address"),
+			+ " and t.ADDRESS = :address",
+		resultClass = SampleEntity.class),
 })
 public class SampleEntity {
 	@Id

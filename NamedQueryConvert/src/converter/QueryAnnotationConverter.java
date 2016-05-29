@@ -52,12 +52,14 @@ public class QueryAnnotationConverter {
 	 */
 	private static void convertNamedNativeQuery(NamedNativeQueries namedNativeQueries) {
 		for (NamedNativeQuery nNQuery : namedNativeQueries.value()) {
-			System.out.println("\t<NamedNativeQuery name = " + nNQuery.name() + ">");
+			System.out.println("\t<NamedNativeQuery name = " + nNQuery.name() + ", "
+				+ "result-class = " + nNQuery.resultClass().getName() + ">");
 			System.out.println("\t\t<![CDATA[");
 			System.out.println("\t\t" + nNQuery.query());
 			System.out.println("\t\t]]>");
 			System.out.println("\t</NmedNativeQuery>");
 			System.out.println("");
+			System.out.println(nNQuery.resultClass().getName());
 		}
 	}
 }
