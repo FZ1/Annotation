@@ -59,7 +59,6 @@ public class QueryAnnotationConverter {
 			System.out.println("\t\t]]>");
 			System.out.println("\t</NmedNativeQuery>");
 			System.out.println("");
-			System.out.println(nNQuery.resultClass().getName());
 		}
 	}
 }
