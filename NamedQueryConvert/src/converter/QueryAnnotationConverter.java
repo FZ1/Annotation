@@ -17,10 +17,11 @@ public class QueryAnnotationConverter {
 		for (int i = 0; i < args.length; i++) {
 			// 対象のクラスを取得
 			Class<?> clazz = Class.forName(args[i]);
-			// クラス内のアノテーションを取得
-			Annotation[] annotations = clazz.getAnnotations();
-
-			for (Annotation a : annotations) {
+			// entityタグを出力
+			System.out.println("<entity class = \"" + clazz.getName() + "\">");
+			
+			// 各アノテーション毎にループ
+			for (Annotation a : clazz.getAnnotations()) {
 				// アノテーションの種類により、処理を分岐
 				if (a instanceof NamedQueries) {
 					NamedQueries NamedQueries = (NamedQueries) a;
@@ -30,6 +31,9 @@ public class QueryAnnotationConverter {
 					convertNamedNativeQuery(namedNativeQueries);
 				}
 			}
+			// entity閉じタグを出力
+			System.out.println("</entity>");
+			System.out.println("");
 		}
 	}
 
@@ -37,10 +41,10 @@ public class QueryAnnotationConverter {
 	 * 引数で渡されたNamedQueriesから、各NamedQueryの情報をXML形式にする。 
 	 */
 	private static void convertNamedQuery(NamedQueries NamedQueries) {
-		for (NamedQuery nQuery : NamedQueries.value()) {
-			System.out.println("\t<NamedQuery name = " + nQuery.name() + ">");
+		for (NamedQuery namedQuery : NamedQueries.value()) {
+			System.out.println("\t<NamedQuery name = \"" + namedQuery.name() + "\">");
 			System.out.println("\t\t<![CDATA[");
-			System.out.println("\t\t" + nQuery.query());
+			System.out.println("\t\t\t" + namedQuery.query());
 			System.out.println("\t\t]]>");
 			System.out.println("\t</NmedQuery>");
 			System.out.println("");
@@ -51,11 +55,11 @@ public class QueryAnnotationConverter {
 	 * 引数で渡されたNamedNativeQueriesから、各NamedNativeQueryの情報をXML形式にする。 
 	 */
 	private static void convertNamedNativeQuery(NamedNativeQueries namedNativeQueries) {
-		for (NamedNativeQuery nNQuery : namedNativeQueries.value()) {
-			System.out.println("\t<NamedNativeQuery name = " + nNQuery.name() + ", "
-				+ "result-class = " + nNQuery.resultClass().getName() + ">");
+		for (NamedNativeQuery namedNativeQuery : namedNativeQueries.value()) {
+			System.out.println("\t<NamedNativeQuery name = \"" + namedNativeQuery.name() + "\", "
+				+ "result-class = \"" + namedNativeQuery.resultClass().getName() + "\">");
 			System.out.println("\t\t<![CDATA[");
-			System.out.println("\t\t" + nNQuery.query());
+			System.out.println("\t\t\t" + namedNativeQuery.query());
 			System.out.println("\t\t]]>");
 			System.out.println("\t</NmedNativeQuery>");
 			System.out.println("");
